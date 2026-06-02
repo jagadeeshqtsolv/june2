@@ -6,6 +6,10 @@ name: run-tests
 on:
   workflow_dispatch:
     inputs:
+      branch:
+        description: "Feature branch to check out and run tests on"
+        required: false
+        default: ""
       spec_paths:
         description: "Space-separated spec file paths to run"
         required: false
@@ -34,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ inputs.branch || github.ref }}
 
       - uses: actions/setup-node@v4
         with:
@@ -53,13 +57,15 @@ jobs:
       - name: Run tests
         env:
           AUTOM_ENVIRONMENT: ${{ inputs.environment }}
+          TEST_ENV: ${{ inputs.environment }}
         run: |
           SPEC_PATHS_ARG="${{ inputs.spec_paths }}"
-          GREP_ARG=""
-          if [ -n "${{ inputs.grep }}" ]; then
-            GREP_ARG="--grep ${{ inputs.grep }}"
+          GREP_PATTERN="${{ inputs.grep }}"
+          if [ -n "$GREP_PATTERN" ]; then
+            npx playwright test $SPEC_PATHS_ARG --grep "$GREP_PATTERN"
+          else
+            npx playwright test $SPEC_PATHS_ARG
           fi
-          npx playwright test $SPEC_PATHS_ARG $GREP_ARG --workers=1 --retries=0 --project=chromium
         continue-on-error: true
         id: run
 
