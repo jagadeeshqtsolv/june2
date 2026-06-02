@@ -1,6 +1,4 @@
 {
-  "name": "qa",
-  "slug": "qa",
   "baseURL": "https://saucedemo.com",
   "username": "standard_user",
   "password": "secret_sauce",
