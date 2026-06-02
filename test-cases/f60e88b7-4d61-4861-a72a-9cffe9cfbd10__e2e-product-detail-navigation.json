@@ -1,0 +1,72 @@
+{
+  "id": "e2e-product-detail-navigation",
+  "testPlanId": "f60e88b7-4d61-4861-a72a-9cffe9cfbd10",
+  "requirementId": "f5fbbcdb-1155-421e-b572-d4a794d11780",
+  "suiteName": "Product Listing & Add to Cart",
+  "case": {
+    "id": "e2e-product-detail-navigation",
+    "title": "Navigate to product detail and back to listing",
+    "priority": "P0",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step-1",
+        "action": "openUrl",
+        "targetDescription": "Open application URL",
+        "value": "https://www.saucedemo.com/"
+      },
+      {
+        "id": "step-2",
+        "action": "fill",
+        "targetDescription": "Enter username",
+        "locatorHint": "[data-test='username']",
+        "value": "standard_user"
+      },
+      {
+        "id": "step-3",
+        "action": "fill",
+        "targetDescription": "Enter password",
+        "locatorHint": "[data-test='password']",
+        "value": "secret_sauce"
+      },
+      {
+        "id": "step-4",
+        "action": "tap",
+        "targetDescription": "Click login button",
+        "locatorHint": "[data-test='login-button']"
+      },
+      {
+        "id": "step-5",
+        "action": "tap",
+        "targetDescription": "Click Sauce Labs Backpack product name",
+        "locatorHint": ".inventory_item_name",
+        "value": "Sauce Labs Backpack"
+      },
+      {
+        "id": "step-6",
+        "action": "assertVisible",
+        "targetDescription": "Verify product detail page is visible",
+        "locatorHint": ".inventory_details_desc_container"
+      },
+      {
+        "id": "step-7",
+        "action": "tap",
+        "targetDescription": "Click Back to Products button",
+        "locatorHint": "[data-test='back-to-products']"
+      },
+      {
+        "id": "step-8",
+        "action": "assertVisible",
+        "targetDescription": "Verify product listing page is visible",
+        "locatorHint": ".inventory_list"
+      }
+    ],
+    "tags": [
+      "@e2e",
+      "@regression"
+    ]
+  }
+}
