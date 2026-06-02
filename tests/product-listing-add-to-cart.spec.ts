@@ -36,10 +36,10 @@ test('Verify product details are visible on listing', { tag: ["@smoke","@regress
     await inventoryPage.expectSauceLabsBackpackVisible();
   });
   await test.step('Assert visible — Verify product price is visible', async () => {
-    await expect(page.locator('.inventory_item_price')).toBeVisible();
+    await expect(page.locator('.inventory_item_price').first()).toBeVisible();
   });
   await test.step('Assert visible — Verify product description is visible', async () => {
-    await expect(page.locator('.inventory_item_desc')).toBeVisible();
+    await expect(page.locator('.inventory_item_desc').first()).toBeVisible();
   });
   await test.step('Assert visible — Verify product image is visible', async () => {
     await inventoryPage.expectItem4ImgVisible();
