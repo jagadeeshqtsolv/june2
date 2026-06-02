@@ -3,6 +3,7 @@ import { CartPage } from "../pageobjects/CartPage";
 import { CheckoutCompletePage } from "../pageobjects/CheckoutCompletePage";
 import { CheckoutStepOnePage } from "../pageobjects/CheckoutStepOnePage";
 import { CheckoutStepTwoPage } from "../pageobjects/CheckoutStepTwoPage";
+import { CommonPage } from "../pageobjects/CommonPage";
 import { InventoryPage } from "../pageobjects/InventoryPage";
 import { LoginPage } from "../pageobjects/LoginPage";
 
@@ -11,6 +12,7 @@ type AppFixtures = {
   checkoutCompletePage: CheckoutCompletePage;
   checkoutStepOnePage: CheckoutStepOnePage;
   checkoutStepTwoPage: CheckoutStepTwoPage;
+  commonPage: CommonPage;
   inventoryPage: InventoryPage;
   loginPage: LoginPage;
 };
@@ -27,6 +29,9 @@ export const test = base.extend<AppFixtures>({
   },
   checkoutStepTwoPage: async ({ page }, use) => {
     await use(new CheckoutStepTwoPage(page));
+  },
+  commonPage: async ({ page }, use) => {
+    await use(new CommonPage(page));
   },
   inventoryPage: async ({ page }, use) => {
     await use(new InventoryPage(page));
