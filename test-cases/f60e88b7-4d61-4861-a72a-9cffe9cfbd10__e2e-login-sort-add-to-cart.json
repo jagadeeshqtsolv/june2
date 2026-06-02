@@ -43,7 +43,7 @@
         "action": "selectOption",
         "targetDescription": "Select sort option Price (Low to High)",
         "locatorHint": "[data-test='product_sort_container']",
-        "value": "lohi"
+        "value": "Price (low to high)"
       },
       {
         "id": "step-6",
