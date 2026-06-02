@@ -1,7 +1,7 @@
 import { test, expect } from '../support/fixtures';
 import testData from '../testdata/test-data.json';
 
-test('Login and verify product listing page loads', { tag: ["@smoke","@regression","@P0","@smoke-login-product-listing"] }, async ({ loginPage, inventoryPage }) => {
+test('Login and verify product listing page loads', { tag: ["@smoke","@regression","@P0","@smoke-login-product-listing"] }, async ({ page, loginPage, inventoryPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -19,7 +19,7 @@ test('Login and verify product listing page loads', { tag: ["@smoke","@regressio
   });
 });
 
-test('Verify product details are visible on listing', { tag: ["@smoke","@regression","@P0","@smoke-product-details-visibility"] }, async ({ loginPage, inventoryPage }) => {
+test('Verify product details are visible on listing', { tag: ["@smoke","@regression","@P0","@smoke-product-details-visibility"] }, async ({ page, loginPage, inventoryPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -36,11 +36,9 @@ test('Verify product details are visible on listing', { tag: ["@smoke","@regress
     await inventoryPage.expectSauceLabsBackpackVisible();
   });
   await test.step('Assert visible — Verify product price is visible', async () => {
-
     await expect(page.locator('.inventory_item_price')).toBeVisible();
   });
   await test.step('Assert visible — Verify product description is visible', async () => {
-
     await expect(page.locator('.inventory_item_desc')).toBeVisible();
   });
   await test.step('Assert visible — Verify product image is visible', async () => {
@@ -48,7 +46,7 @@ test('Verify product details are visible on listing', { tag: ["@smoke","@regress
   });
 });
 
-test('Add a product to cart and verify cart icon updates', { tag: ["@smoke","@regression","@P0","@smoke-add-to-cart"] }, async ({ loginPage, inventoryPage, commonPage }) => {
+test('Add a product to cart and verify cart icon updates', { tag: ["@smoke","@regression","@P0","@smoke-add-to-cart"] }, async ({ page, loginPage, inventoryPage, commonPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -69,7 +67,7 @@ test('Add a product to cart and verify cart icon updates', { tag: ["@smoke","@re
   });
 });
 
-test('Remove a product from cart and verify cart icon updates', { tag: ["@smoke","@regression","@P0","@smoke-remove-from-cart"] }, async ({ loginPage, inventoryPage }) => {
+test('Remove a product from cart and verify cart icon updates', { tag: ["@smoke","@regression","@P0","@smoke-remove-from-cart"] }, async ({ page, loginPage, inventoryPage, cartPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -86,14 +84,14 @@ test('Remove a product from cart and verify cart icon updates', { tag: ["@smoke"
     await inventoryPage.clickAddToCartSauceLabsBackpack();
   });
   await test.step('Click — Click Remove for Sauce Labs Backpack', async () => {
-    await page.locator("[data-test='remove-sauce-labs-backpack']").click();
+    await cartPage.clickRemoveSauceLabsBackpack();
   });
   await test.step('Assert hidden — Verify cart icon is hidden (no items)', async () => {
     await expect(page.locator('.shopping_cart_badge')).toBeHidden();
   });
 });
 
-test('Login, sort products, add to cart, verify cart', { tag: ["@e2e","@regression","@P0","@e2e-login-sort-add-to-cart"] }, async ({ loginPage, inventoryPage, commonPage }) => {
+test('Login, sort products, add to cart, verify cart', { tag: ["@e2e","@regression","@P0","@e2e-login-sort-add-to-cart"] }, async ({ page, loginPage, inventoryPage, commonPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -117,7 +115,7 @@ test('Login, sort products, add to cart, verify cart', { tag: ["@e2e","@regressi
   });
 });
 
-test('Navigate to product detail and back to listing', { tag: ["@e2e","@regression","@P0","@e2e-product-detail-navigation"] }, async ({ loginPage, inventoryPage }) => {
+test('Navigate to product detail and back to listing', { tag: ["@e2e","@regression","@P0","@e2e-product-detail-navigation"] }, async ({ page, loginPage, inventoryPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -144,7 +142,7 @@ test('Navigate to product detail and back to listing', { tag: ["@e2e","@regressi
   });
 });
 
-test('Add multiple products to cart and verify cart count', { tag: ["@e2e","@regression","@P0","@e2e-add-multiple-products-to-cart"] }, async ({ loginPage, inventoryPage }) => {
+test('Add multiple products to cart and verify cart count', { tag: ["@e2e","@regression","@P0","@e2e-add-multiple-products-to-cart"] }, async ({ page, loginPage, inventoryPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -168,7 +166,7 @@ test('Add multiple products to cart and verify cart count', { tag: ["@e2e","@reg
   });
 });
 
-test('Add and remove product from cart, verify cart updates', { tag: ["@e2e","@regression","@P0","@e2e-add-remove-cart-flow"] }, async ({ loginPage, inventoryPage }) => {
+test('Add and remove product from cart, verify cart updates', { tag: ["@e2e","@regression","@P0","@e2e-add-remove-cart-flow"] }, async ({ page, loginPage, inventoryPage, cartPage }) => {
   await test.step('Open — Open application URL', async () => {
     await page.goto('/');
   });
@@ -188,7 +186,7 @@ test('Add and remove product from cart, verify cart updates', { tag: ["@e2e","@r
     await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
   });
   await test.step('Click — Click Remove for Sauce Labs Backpack', async () => {
-    await page.locator("[data-test='remove-sauce-labs-backpack']").click();
+    await cartPage.clickRemoveSauceLabsBackpack();
   });
   await test.step('Assert hidden — Verify cart icon is hidden (no items)', async () => {
     await expect(page.locator('.shopping_cart_badge')).toBeHidden();
