@@ -3,7 +3,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 
 // Select environment: TEST_ENV=staging npm test  (default: qa)
-const envName = process.env.TEST_ENV ?? "qa";
+// AUTOM_ENVIRONMENT is set by the AutomationAI CI workflow.
+const envName = process.env.TEST_ENV || process.env.AUTOM_ENVIRONMENT || "qa";
 
 let env: Record<string, unknown> = {};
 try {

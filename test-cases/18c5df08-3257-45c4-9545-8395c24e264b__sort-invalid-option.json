@@ -1,0 +1,62 @@
+{
+  "id": "sort-invalid-option",
+  "testPlanId": "18c5df08-3257-45c4-9545-8395c24e264b",
+  "requirementId": "f5fbbcdb-1155-421e-b572-d4a794d11780",
+  "suiteName": "Product Listing & Add to Cart - Negative",
+  "case": {
+    "id": "sort-invalid-option",
+    "title": "Sorting fails with invalid sort option",
+    "priority": "P2",
+    "platforms": [
+      "chrome"
+    ],
+    "preconditions": [],
+    "steps": [
+      {
+        "id": "step1",
+        "action": "openUrl",
+        "targetDescription": "Navigate to login page",
+        "locatorHint": "https://www.saucedemo.com/",
+        "value": "https://www.saucedemo.com/"
+      },
+      {
+        "id": "step2",
+        "action": "fill",
+        "targetDescription": "Enter valid username",
+        "locatorHint": "[data-test='username']",
+        "value": "standard_user"
+      },
+      {
+        "id": "step3",
+        "action": "fill",
+        "targetDescription": "Enter valid password",
+        "locatorHint": "[data-test='password']",
+        "value": "secret_sauce"
+      },
+      {
+        "id": "step4",
+        "action": "tap",
+        "targetDescription": "Click login button",
+        "locatorHint": "[data-test='login-button']"
+      },
+      {
+        "id": "step5",
+        "action": "selectOption",
+        "targetDescription": "Select invalid sort option",
+        "locatorHint": "[data-test='product_sort_container']",
+        "value": "invalid_option"
+      },
+      {
+        "id": "step6",
+        "action": "assertText",
+        "targetDescription": "Error or no change in product order",
+        "locatorHint": ".inventory_list",
+        "assertion": "Product order unchanged"
+      }
+    ],
+    "tags": [
+      "@negative",
+      "@regression"
+    ]
+  }
+}

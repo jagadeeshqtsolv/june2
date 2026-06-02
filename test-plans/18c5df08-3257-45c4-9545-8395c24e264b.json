@@ -1,0 +1,245 @@
+{
+  "id": "18c5df08-3257-45c4-9545-8395c24e264b",
+  "requirementId": "f5fbbcdb-1155-421e-b572-d4a794d11780",
+  "model": "gpt-4.1",
+  "createdAt": "2026-06-02T10:24:03.891Z",
+  "plan": {
+    "version": 1,
+    "suiteName": "Product Listing & Add to Cart - Negative",
+    "cases": [
+      {
+        "id": "login-invalid-credentials",
+        "title": "Login fails with invalid credentials",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "step1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to login page",
+            "locatorHint": "https://www.saucedemo.com/",
+            "value": "https://www.saucedemo.com/"
+          },
+          {
+            "id": "step2",
+            "action": "fill",
+            "targetDescription": "Enter invalid username",
+            "locatorHint": "[data-test='username']",
+            "value": "invalid_user"
+          },
+          {
+            "id": "step3",
+            "action": "fill",
+            "targetDescription": "Enter invalid password",
+            "locatorHint": "[data-test='password']",
+            "value": "wrong_password"
+          },
+          {
+            "id": "step4",
+            "action": "tap",
+            "targetDescription": "Click login button",
+            "locatorHint": "[data-test='login-button']"
+          },
+          {
+            "id": "step5",
+            "action": "assertVisible",
+            "targetDescription": "Error message is displayed",
+            "locatorHint": "[data-test='error']"
+          }
+        ],
+        "tags": [
+          "@negative",
+          "@regression"
+        ]
+      },
+      {
+        "id": "login-missing-password",
+        "title": "Login fails when password is missing",
+        "priority": "P0",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "step1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to login page",
+            "locatorHint": "https://www.saucedemo.com/",
+            "value": "https://www.saucedemo.com/"
+          },
+          {
+            "id": "step2",
+            "action": "fill",
+            "targetDescription": "Enter valid username",
+            "locatorHint": "[data-test='username']",
+            "value": "standard_user"
+          },
+          {
+            "id": "step3",
+            "action": "clear",
+            "targetDescription": "Clear password field",
+            "locatorHint": "[data-test='password']"
+          },
+          {
+            "id": "step4",
+            "action": "tap",
+            "targetDescription": "Click login button",
+            "locatorHint": "[data-test='login-button']"
+          },
+          {
+            "id": "step5",
+            "action": "assertVisible",
+            "targetDescription": "Error message is displayed",
+            "locatorHint": "[data-test='error']"
+          }
+        ],
+        "tags": [
+          "@negative",
+          "@regression"
+        ]
+      },
+      {
+        "id": "add-to-cart-unauthenticated",
+        "title": "Cannot add product to cart when not logged in",
+        "priority": "P1",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "step1",
+            "action": "openUrl",
+            "targetDescription": "Navigate directly to inventory page without login",
+            "locatorHint": "https://www.saucedemo.com/inventory.html",
+            "value": "https://www.saucedemo.com/inventory.html"
+          },
+          {
+            "id": "step2",
+            "action": "assertVisible",
+            "targetDescription": "Login page is displayed",
+            "locatorHint": "[data-test='login-button']"
+          }
+        ],
+        "tags": [
+          "@negative",
+          "@regression"
+        ]
+      },
+      {
+        "id": "add-to-cart-invalid-product",
+        "title": "Add to cart fails for non-existent product",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "step1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to login page",
+            "locatorHint": "https://www.saucedemo.com/",
+            "value": "https://www.saucedemo.com/"
+          },
+          {
+            "id": "step2",
+            "action": "fill",
+            "targetDescription": "Enter valid username",
+            "locatorHint": "[data-test='username']",
+            "value": "standard_user"
+          },
+          {
+            "id": "step3",
+            "action": "fill",
+            "targetDescription": "Enter valid password",
+            "locatorHint": "[data-test='password']",
+            "value": "secret_sauce"
+          },
+          {
+            "id": "step4",
+            "action": "tap",
+            "targetDescription": "Click login button",
+            "locatorHint": "[data-test='login-button']"
+          },
+          {
+            "id": "step5",
+            "action": "tap",
+            "targetDescription": "Attempt to click Add to Cart for non-existent product",
+            "locatorHint": "#add-to-cart-non-existent-product"
+          },
+          {
+            "id": "step6",
+            "action": "assertHidden",
+            "targetDescription": "Cart icon does not update",
+            "locatorHint": ".shopping_cart_badge"
+          }
+        ],
+        "tags": [
+          "@negative",
+          "@regression"
+        ]
+      },
+      {
+        "id": "sort-invalid-option",
+        "title": "Sorting fails with invalid sort option",
+        "priority": "P2",
+        "platforms": [
+          "chrome"
+        ],
+        "preconditions": [],
+        "steps": [
+          {
+            "id": "step1",
+            "action": "openUrl",
+            "targetDescription": "Navigate to login page",
+            "locatorHint": "https://www.saucedemo.com/",
+            "value": "https://www.saucedemo.com/"
+          },
+          {
+            "id": "step2",
+            "action": "fill",
+            "targetDescription": "Enter valid username",
+            "locatorHint": "[data-test='username']",
+            "value": "standard_user"
+          },
+          {
+            "id": "step3",
+            "action": "fill",
+            "targetDescription": "Enter valid password",
+            "locatorHint": "[data-test='password']",
+            "value": "secret_sauce"
+          },
+          {
+            "id": "step4",
+            "action": "tap",
+            "targetDescription": "Click login button",
+            "locatorHint": "[data-test='login-button']"
+          },
+          {
+            "id": "step5",
+            "action": "selectOption",
+            "targetDescription": "Select invalid sort option",
+            "locatorHint": "[data-test='product_sort_container']",
+            "value": "invalid_option"
+          },
+          {
+            "id": "step6",
+            "action": "assertText",
+            "targetDescription": "Error or no change in product order",
+            "locatorHint": ".inventory_list",
+            "assertion": "Product order unchanged"
+          }
+        ],
+        "tags": [
+          "@negative",
+          "@regression"
+        ]
+      }
+    ]
+  }
+}
